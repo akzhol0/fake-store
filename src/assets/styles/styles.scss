@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,5 +10,5 @@
 }
 
 html, body {
-  background: #131313;
+  font-family: "Sunflower", sans-serif;
 }

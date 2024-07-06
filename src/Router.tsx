@@ -3,6 +3,7 @@ import { ContextOverAll } from "./context/logic"
 import HomePage from "./components/home-page/HomePage"
 import Header from "./components/header/Header"
 import Footer from "./components/footer/Footer"
+import AllProducts from "./components/all-products-page/AllProducts"
 
 function Router() {
   return (
@@ -11,6 +12,7 @@ function Router() {
       <ContextOverAll>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/all-products" element={<AllProducts />}></Route>
         </Routes>
       </ContextOverAll>
       <Footer />

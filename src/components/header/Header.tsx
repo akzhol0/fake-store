@@ -52,7 +52,7 @@ function Header() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-5 text-[18px]">
             <span className="cursor-pointer flex items-center gap-2"> <img className=" mt-[-2px]" src="/img/user.png" width={24} height={24} /> Profile</span>
             <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyHeartIcon /></span> Saved</span>
-            <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyCartIcon /></span> Cart</span>
+            <Link to='/cart'><span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyCartIcon /></span> Cart</span></Link>
           </div>
         </div>
         <div className="flex md:hidden items-center relative">

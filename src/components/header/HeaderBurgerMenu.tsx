@@ -5,8 +5,14 @@ function HeaderBurgerMenu() {
   
   return (
     <div className="w-full flex justify-between py-4 border-b border-gray-200 px-5 md:px-0">
-      <div className={headerBurgerTop ? `block md:hidden fixed top-[57px] right-0 w-[350px] h-full bg-black z-10 duration-[.3s]`
-        : 'block md:hidden fixed top-[57px] right-[-400px] w-[350px] h-full bg-black z-10 duration-[.3s]'}>
+      <div className={headerBurgerTop ? `w-[350px] h-full top-[57px] right-0 fixed flex flex-col items-center text-center md:hidden bg-[#131313] z-10 duration-[.3s]` : 'w-[350px] h-full top-[57px] right-[-400px] fixed flex flex-col items-center text-center md:hidden bg-[#131313] z-10 duration-[.3s]'}>
+        <ul className="flex flex-col gap-5 text-white mt-4">
+          <li className="cursor-pointer">Discounts</li>
+          <li className="cursor-pointer">Delivery</li>
+          <li className="cursor-pointer">Help</li>
+          <li className="cursor-pointer">Installment</li>
+          <div className="cursor-pointer">Dark Mode</div>
+        </ul>
       </div>
       <div className="flex gap-4">
         <span className="text-gray-400 cursor-pointer">Rus</span>

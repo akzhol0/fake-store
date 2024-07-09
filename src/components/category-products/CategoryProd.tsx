@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import HomePageCollection from "../home-page/HomePageCollection";
+import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import MyLoading from "../UI/myLoadingPerfs/MyLoading";
 
-function AllProducts() {
+function CategoryProd() {
+  const { categoryTitle } = useParams()
+  const navigate = useNavigate();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [products, setProducts] = useState<any>([]);
-  
-  const getProducts = async () => {
-    const url = 'https://fakestoreapi.com/products';
+
+  const getCategoryProducts = async () => {
+    const url = `https://fakestoreapi.com/products/category/${categoryTitle}`;
     const options = {
       method: 'GET'
     }
@@ -16,9 +20,7 @@ function AllProducts() {
       const response = await fetch(url, options)
       const result = await response.json()
 
-      result.forEach((item: any) => {
-        setProducts((prev: any) => [...prev, item])
-      })
+      setProducts(result)
       setLoaded(true)
     } catch (e) {
       console.error(e)
@@ -26,20 +28,26 @@ function AllProducts() {
   }
 
   useEffect(() => {
-    !loaded && getProducts()  
-  }, [])
+    setLoaded(false)
+    getCategoryProducts()
+  }, [categoryTitle])
 
   return (
     <div className="w-full flex justify-center">
       <div className="w-[95%] 2xl:w-[70%]">
+        <span onClick={() => navigate('/')}>
+          <MyDefaultButton className="mt-2">Go back</MyDefaultButton>
+        </span>
         {loaded ? (
           <HomePageCollection products={products} loaded={loaded} />
         ) : (
-          <div className="h-[500px] text-center"><MyLoading></MyLoading></div>
+          <div className="h-[500px] text-center">
+            <MyLoading></MyLoading>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-export default AllProducts;
+export default CategoryProd;

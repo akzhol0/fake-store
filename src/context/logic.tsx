@@ -7,6 +7,10 @@ type ContextProps = {
   deleteItemCart: (arg0: number) => void;
   check: boolean;
   setCheck: (arg0: boolean) => void;
+  modal: boolean;
+  setModal: (arg0: boolean) => void;
+  searchBar: string;
+  setSearchBar: (arg0: string) => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -18,6 +22,8 @@ type ContextOverAllProps = {
 export function ContextOverAll({ children }: ContextOverAllProps) {
   const [check, setCheck] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<any>([]);
+  const [modal, setModal] = useState<boolean>(false);
+  const [searchBar, setSearchBar] = useState<string>('');
 
   // add cart item
   const addCartItem = (item: any) => {
@@ -67,6 +73,10 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       deleteItemCart,
       check,
       setCheck,
+      modal,
+      setModal,
+      searchBar,
+      setSearchBar,
     }}>
       {children}
     </contextData.Provider>

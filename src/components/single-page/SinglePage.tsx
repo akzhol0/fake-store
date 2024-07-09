@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import { contextData } from "../../context/logic";
+import MyLoading from "../UI/myLoadingPerfs/MyLoading";
 
 function SinglePage() {
   const { addCartItem } = useContext(contextData)
@@ -66,7 +67,7 @@ function SinglePage() {
             </div>
           </div>
         ) : (
-          <p className='text-center h-[400px]'>Loading...</p>
+          <p className='text-center h-[400px]'><MyLoading></MyLoading></p>
         )}
       </div>
     </div>

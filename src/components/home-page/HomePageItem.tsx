@@ -7,7 +7,7 @@ type HomePageItemProps = {
 }
 
 function HomePageItem({ item }: HomePageItemProps) {
-  const { addCartItem } = useContext(contextData)
+  const { addCartItem, setModal } = useContext(contextData);
 
   return (
     <div className="w-full h-[600px] md:h-[500px] relative">
@@ -26,7 +26,7 @@ function HomePageItem({ item }: HomePageItemProps) {
         <span className="absolute top-3 left-3 w-[30px] h-[30px] rounded flex justify-center items-center text-white bg-red-500">
           {item.rating.rate}
         </span>
-        <span onClick={() => addCartItem(item)} className="w-[40px] h-[40px] p-1 absolute bottom-[153px] right-3 rounded bg-red-500 cursor-pointer">
+        <span onClick={() => { addCartItem(item); setModal(true)}} className="w-[40px] h-[40px] p-1 absolute bottom-[153px] right-3 rounded bg-red-500 cursor-pointer">
           <img src="/img/cart.png" alt="cart picture" />
         </span>
       </div>

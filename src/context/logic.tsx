@@ -1,4 +1,7 @@
 import React, { createContext, useState } from "react";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 type ContextProps = {
   cartProducts: any;
@@ -13,6 +16,8 @@ type ContextProps = {
   setSearchBar: (arg0: string) => void;
   langIsEng: boolean;
   setLangIsEng: (arg0: boolean) => void;
+  token: any;
+  setToken: (arg0: any) => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -27,6 +32,7 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<string>('');
   const [langIsEng, setLangIsEng] = useState<boolean>(true);
+  const [token, setToken] = useState(cookies.get('auth-token'))
 
   // add cart item
   const addCartItem = (item: any) => {
@@ -82,6 +88,8 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       setSearchBar,
       langIsEng,
       setLangIsEng,
+      token,
+      setToken,
     }}>
       {children}
     </contextData.Provider>

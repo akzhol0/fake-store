@@ -7,6 +7,9 @@ import AllProducts from "./components/all-products-page/AllProducts";
 import SinglePage from "./components/single-page/SinglePage";
 import Cart from "./components/cart/Cart";
 import CategoryProd from "./components/category-products/CategoryProd";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserProfile from "./components/user-profile/UserProfile";
 
 function Router() {
   return (
@@ -19,6 +22,9 @@ function Router() {
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/single-product/:id" element={<SinglePage />}></Route>
           <Route path="/category/:categoryTitle" element={<CategoryProd />}></Route>
+          <Route path="/auth/login" element={<Login/>}></Route>
+          <Route path="/auth/register" element={<Register />}></Route>
+          <Route path="/user-profile" element={<UserProfile />}></Route>
         </Routes>
         <Footer />
       </ContextOverAll>

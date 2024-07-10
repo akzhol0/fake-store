@@ -3,7 +3,7 @@ const ru = {
     languages: ["Рус", "Анг"],
     helpers: ["Скидки", "Доставка", "Помощь", "Установка"],
     input: "Поиск вещей...",
-    userOptions: ["Профиль", "Сохр...", "Корзина"],
+    userOptions: ["Профиль", "Сохран...", "Корзина"],
   },
   main: {
     strong: "Популярные товары месяца",
@@ -16,6 +16,19 @@ const ru = {
   cart: {
     cartState: "Корзина пуста",
     result: "Итого:",
+  },
+  signin: {
+    titleAndButton: "Войти",
+    loginPlaceholder: "Логин",
+    passwordPlaceholder: "Пароль",
+    sign: "Еще аккаунт не создали?",
+  },
+  signup: {
+    titleAndButton: "Регистрация",
+    loginPlaceholder: "Логин",
+    passwordPlaceholder: "Пароль",
+    repeatPasswordPlaceholder: "Повторить пароль",
+    sign: "Есть аккаунт?",
   },
 };
 export default ru;

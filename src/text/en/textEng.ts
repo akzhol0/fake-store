@@ -17,5 +17,19 @@ const en = {
     cartState: "Cart is empty",
     result: "Result:",
   },
+  signin: {
+    titleAndButton: "Sign In",
+    loginPlaceholder: "Login",
+    passwordPlaceholder: "Password",
+    sign: "Don't have an account yet?",
+  },
+  signup: {
+    titleAndButton: "Sign Up",
+    loginPlaceholder: "Login",
+    passwordPlaceholder: "Password",
+    repeatPasswordPlaceholder: "Repeat Password",
+    sign: "Have an account?",
+  },
 };
+
 export default en;

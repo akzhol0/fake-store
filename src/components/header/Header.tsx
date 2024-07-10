@@ -73,13 +73,13 @@ function Header() {
             className="w-full h-[60px] mb-4 ps-4 z-2 border border-gray-400 rounded-md"
             type="text"
             placeholder="Search for an item" />
-          <Link to='/all-products'>
-            <span className="absolute right-2 bottom-[24px]">
-              <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">
-                <img src="/img/s.png" width={25} height={25} />
-              </div>
-            </span>
-          </Link>
+          <span onClick={() => setSearchBar(tempSearchBar)} className="absolute right-2 bottom-[24px]">
+            <Link to='/all-products'>
+                <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">
+                  <img src="/img/s.png" width={25} height={25} />
+                </div>
+            </Link>
+          </span>
         </div>
         <HeaderCategories categories={categories} loadedCategories={loadedCategories} />
         {modal && (

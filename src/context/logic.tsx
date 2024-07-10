@@ -23,7 +23,7 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [check, setCheck] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<any>([]);
   const [modal, setModal] = useState<boolean>(false);
-  const [searchBar, setSearchBar] = useState<string>('');
+  const [searchBar, setSearchBar] = useState<string>('123');
 
   // add cart item
   const addCartItem = (item: any) => {

@@ -3,9 +3,11 @@ import { useNavigate, useParams } from "react-router";
 import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import { contextData } from "../../context/logic";
 import MyLoading from "../UI/myLoadingPerfs/MyLoading";
+import ru from '../../text/ru/textRus';
+import en from '../../text/en/textEng';
 
 function SinglePage() {
-  const { addCartItem } = useContext(contextData)
+  const { addCartItem, setModal, langIsEng } = useContext(contextData)
   const { id } = useParams();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [product, setProduct] = useState<any>([]);
@@ -39,7 +41,7 @@ function SinglePage() {
         <div className="w-full my-2">
           <span onClick={() => navigate('/')}>
             <MyDefaultButton>
-              Go back
+              {langIsEng ? 'Go Back': 'Назад'}
             </MyDefaultButton>
           </span>
         </div>
@@ -60,14 +62,14 @@ function SinglePage() {
                   <p>{product.price} $</p>
                   <sub className='line-through text-[#afafaf]'>{Math.round((product.price / 5) + product.price)}.99 $</sub>
                 </span>
-                <div onClick={() => addCartItem(product)}>
-                  <MyDefaultButton className="w-full py-3 mt-2">Add to Cart</MyDefaultButton>
+                <div onClick={() => { addCartItem(product); setModal(true) }}>
+                  <MyDefaultButton className="w-full py-3 mt-2">{langIsEng ? en.singlePage.addToCart : ru.singlePage.addToCart}</MyDefaultButton>
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <p className='text-center h-[400px]'><MyLoading></MyLoading></p>
+          <div className='text-center h-[400px]'><MyLoading></MyLoading></div>
         )}
       </div>
     </div>

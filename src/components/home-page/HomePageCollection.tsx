@@ -1,8 +1,9 @@
-import { useParams } from "react-router";
 import HomePageItem from "./HomePageItem";
 import MyLoading from "../UI/myLoadingPerfs/MyLoading";
-import { contextData } from "../../context/logic";
 import { useContext} from "react";
+import { contextData } from '../../context/logic';
+import ru from '../../text/ru/textRus';
+import en from '../../text/en/textEng';
 
 type HomePageCollectionProps = {
   loaded: boolean;
@@ -10,14 +11,13 @@ type HomePageCollectionProps = {
 }
 
 function HomePageCollection({ loaded, products }: HomePageCollectionProps) {
-  const { categoryTitle } = useParams();
-  const { searchBar } = useContext(contextData);
+  const { searchBar, langIsEng } = useContext(contextData);
 
   return (
     <>
       <div className='flex flex-col py-5'>
-        <strong className='text-[40px]'>Popular {categoryTitle ? categoryTitle : 'goods'} of the month</strong>
-        <small className='text-[15px] text-gray-400'>According to the search engine results, review on the platform, and number of likes on social medias</small>
+        <strong className='text-[40px]'>{langIsEng ? en.main.strong : ru.main.strong}</strong>
+        <small className='text-[15px] text-gray-400'>{langIsEng ? en.main.small : ru.main.small}</small>
       </div>
       {loaded ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 place-items-center">

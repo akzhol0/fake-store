@@ -11,6 +11,8 @@ type ContextProps = {
   setModal: (arg0: boolean) => void;
   searchBar: string;
   setSearchBar: (arg0: string) => void;
+  langIsEng: boolean;
+  setLangIsEng: (arg0: boolean) => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -24,6 +26,7 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [cartProducts, setCartProducts] = useState<any>([]);
   const [modal, setModal] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<string>('');
+  const [langIsEng, setLangIsEng] = useState<boolean>(true);
 
   // add cart item
   const addCartItem = (item: any) => {
@@ -77,6 +80,8 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       setModal,
       searchBar,
       setSearchBar,
+      langIsEng,
+      setLangIsEng,
     }}>
       {children}
     </contextData.Provider>

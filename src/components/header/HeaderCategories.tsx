@@ -11,14 +11,14 @@ function HeaderCategories({ loadedCategories, categories }: HeaderCategoriesProp
   const { setSearchBar } = useContext(contextData)
 
   return (
-    <div className="w-full scrscr flex gap-2 overflow-x-scroll">
+    <div className="w-full flex gap-2 overflow-x-scroll">
       {loadedCategories ? (
         categories.map((item: any) => (
-          <Link key={item} className="py-2" to={`/category/${item}`}>
-            <span onClick={() => setSearchBar('')} className="cursor-pointer py-2 px-4 bg-[#e7e7e7] rounded-lg">
-              {item}
-            </span>
-          </Link>
+            <Link className="flex items-center rounded-lg text-center py-2 px-2 md:px-4 bg-[#e4e4e4]" key={item} to={`/category/${item}`}>
+              <span onClick={() => setSearchBar('')} className="cursor-pointer">
+                {item}
+              </span>
+            </Link>
         ))
       ) : (
         <p className="py-2">Loading...</p>

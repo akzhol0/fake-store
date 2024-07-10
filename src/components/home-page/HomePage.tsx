@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../../assets/styles/styles.scss'
 import HomePageCollection from './HomePageCollection';
 import { Link } from 'react-router-dom';
+import { contextData } from '../../context/logic';
 
 function HomePage() {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [products, setProducts] = useState<any>([]);
+  const {langIsEng} = useContext(contextData);
 
   useEffect(() => {
     !loaded && getProducsts()
@@ -42,7 +44,11 @@ function HomePage() {
         <div className='w-full flex justify-center py-5'>
           <Link to='/all-products'>
             <button className='py-2 px-5 border border-gray-500 rounded-lg hover:bg-gray-200 duration-200'>
-              All popular goods
+              {langIsEng ? (
+                'All popular goods'
+              ) : (
+                'Все популярные товары'
+              )}
             </button>
           </Link>
         </div>

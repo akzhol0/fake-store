@@ -7,7 +7,7 @@ type CartItemProps = {
 }
 
 function CartItem({ item }: CartItemProps) {
-  const { deleteItemCart, check, setCheck } = useContext(contextData);
+  const { deleteItemCart, check, setCheck, langIsEng } = useContext(contextData);
 
   return (
     <div className="w-full h-[80px] flex justify-between items-center rounded-md">
@@ -22,7 +22,7 @@ function CartItem({ item }: CartItemProps) {
       </div>
       <p className="text-[20px] me-2 md:me-4">{item.price}$</p>
       <span onClick={() => { deleteItemCart(item.id); setCheck(check ? false : true)}}>
-        <MyDefaultButton>Delete</MyDefaultButton>
+        <MyDefaultButton>{langIsEng ? 'Delete' : 'Удалить'}</MyDefaultButton>
       </span>
     </div>
   );

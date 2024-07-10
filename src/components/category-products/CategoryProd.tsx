@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import HomePageCollection from "../home-page/HomePageCollection";
 import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import MyLoading from "../UI/myLoadingPerfs/MyLoading";
+import { contextData } from "../../context/logic";
 
 function CategoryProd() {
+  const {langIsEng} = useContext(contextData)
   const { categoryTitle } = useParams()
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -36,7 +38,7 @@ function CategoryProd() {
     <div className="w-full flex justify-center">
       <div className="w-[95%] 2xl:w-[70%]">
         <span onClick={() => navigate('/')}>
-          <MyDefaultButton className="mt-2">Go back</MyDefaultButton>
+          <MyDefaultButton className="mt-2">{langIsEng ? 'Go Back' : 'Назад'}</MyDefaultButton>
         </span>
         {loaded ? (
           <HomePageCollection products={products} loaded={loaded} />

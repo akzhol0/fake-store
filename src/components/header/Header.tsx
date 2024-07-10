@@ -6,9 +6,11 @@ import HeaderCategories from "./HeaderCategories";
 import { Link } from "react-router-dom";
 import MyModal from "../UI/my-modals/MyModal";
 import { contextData } from "../../context/logic";
+import en from "../../text/en/textEng";
+import ru from "../../text/ru/textRus";
 
 function Header() {
-  const { modal, setSearchBar } = useContext(contextData);
+  const { modal, setSearchBar, langIsEng } = useContext(contextData);
   const [categories, setCategories] = useState<string[]>([]);
   const [loadedCategories, setLoadedCategories] = useState<boolean>(false);
   const [tempSearchBar, setTempSearchBar] = useState<string>('');
@@ -49,9 +51,9 @@ function Header() {
             <input
               onChange={(e) => setTempSearchBar(e.target.value)}
               value={tempSearchBar}
-              className="md:w-[350px] xl:w-[500px] h-full ps-4 border border-gray-400 rounded-md"
+              className="md:w-[300px] xl:w-[500px] h-full ps-4 border border-gray-400 rounded-md"
               type="text"
-              placeholder="Search for an item" />
+              placeholder={langIsEng ? en.header.input : ru.header.input} />
             <span onClick={() => setSearchBar(tempSearchBar)} className="absolute right-1">
               <Link to='/all-products'>
                 <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">
@@ -61,9 +63,9 @@ function Header() {
             </span>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-5 text-[18px]">
-            <span className="cursor-pointer flex items-center gap-2"> <img className=" mt-[-2px]" src="/img/user.png" width={24} height={24} /> Profile</span>
-            <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyHeartIcon /></span> Saved</span>
-            <Link to='/cart'><span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyCartIcon /></span> Cart</span></Link>
+            <span className="cursor-pointer flex items-center gap-2"> <img className=" mt-[-2px]" src="/img/user.png" width={24} height={24} /> {langIsEng ? en.header.userOptions[0] : ru.header.userOptions[0]}</span>
+            <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyHeartIcon /></span> {langIsEng ? en.header.userOptions[1] : ru.header.userOptions[1]}</span>
+            <Link to='/cart'><span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyCartIcon /></span> {langIsEng ? en.header.userOptions[2] : ru.header.userOptions[2]}</span></Link>
           </div>
         </div>
         <div className="flex md:hidden items-center relative">
@@ -72,7 +74,7 @@ function Header() {
             value={tempSearchBar}
             className="w-full h-[60px] mb-4 ps-4 z-2 border border-gray-400 rounded-md"
             type="text"
-            placeholder="Search for an item" />
+            placeholder={langIsEng ? en.header.input : ru.header.input}/>
           <span onClick={() => setSearchBar(tempSearchBar)} className="absolute right-2 bottom-[24px]">
             <Link to='/all-products'>
                 <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">

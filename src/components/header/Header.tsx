@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import MyCartIcon from "../UI/my-icons/MyCartIcon"
-import MyHeartIcon from "../UI/my-icons/MyHeartIcon"
+import MyCartIcon from "../UI/my-icons/MyCartIcon";
+import MyHeartIcon from "../UI/my-icons/MyHeartIcon";
 import HeaderBurgerMenu from "./HeaderBurgerMenu";
 import HeaderCategories from "./HeaderCategories";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,10 +34,10 @@ function Header() {
   }
 
   function navigateFunc(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault();
 
-    setSearchBar(tempSearchBar)
-    navigate('/all-products')
+    setSearchBar(tempSearchBar);
+    navigate('/all-products');
   }
 
   useEffect(() => {

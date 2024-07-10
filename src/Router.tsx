@@ -29,7 +29,6 @@ function Router() {
         <Footer />
       </ContextOverAll>
     </BrowserRouter>
-
   )
 }
 

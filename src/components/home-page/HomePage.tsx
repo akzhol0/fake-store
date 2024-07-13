@@ -87,7 +87,7 @@ function HomePage() {
         />
       </div>
       <div className="w-[95%] xl:w-[70%]">
-        <HomePageCollection loaded={secondPostLoaded} products={secondPostProducts} />
+        <HomePageCollection titleBoolean={true} loaded={secondPostLoaded} products={secondPostProducts} />
         <div className='w-full flex justify-center py-5'>
           <Link to='/category/electronics'>
             <button className='py-2 px-5 border border-gray-500 rounded-lg hover:bg-gray-200 duration-200'>

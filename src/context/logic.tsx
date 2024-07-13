@@ -18,6 +18,9 @@ type ContextProps = {
   setLangIsEng: (arg0: boolean) => void;
   token: any;
   setToken: (arg0: any) => void;
+  savedProducts: any;
+  addSaveditem: (arg0: any) => void;
+  deleteSaveditem: (arg0: number) => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -32,7 +35,23 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [modal, setModal] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<string>('');
   const [langIsEng, setLangIsEng] = useState<boolean>(true);
-  const [token, setToken] = useState(cookies.get('auth-token'))
+  const [token, setToken] = useState(cookies.get('auth-token'));
+  const [savedProducts, setSavedProducts] = useState<any>([]);
+
+  // add to saved
+  const addSaveditem = (item: any) => {
+    const addIds: number[] = [];
+    savedProducts.map((item: any) => addIds.push(item.id))
+
+    if (!addIds.includes(item.id)) {
+      setSavedProducts((prev: any) => [...prev, item]);
+    }
+  }
+
+  // delete  saved
+  const deleteSaveditem = (id: number) => {
+    setSavedProducts(savedProducts.filter((item: any) => item.id !== id));
+  }
 
   // add cart item
   const addCartItem = (item: any) => {
@@ -46,7 +65,7 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
         }
       });
     } else {
-      setCartProducts((prev: any) => [...prev, {...item, quantity: 1}]);
+      setCartProducts((prev: any) => [...prev, { ...item, quantity: 1 }]);
     }
   }
 
@@ -90,6 +109,9 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       setLangIsEng,
       token,
       setToken,
+      savedProducts,
+      addSaveditem,
+      deleteSaveditem,
     }}>
       {children}
     </contextData.Provider>

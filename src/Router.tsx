@@ -10,6 +10,7 @@ import CategoryProd from "./components/category-products/CategoryProd";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserProfile from "./components/user-profile/UserProfile";
+import SavedProducts from "./components/saved/SavedProducts";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
           <Route path="/auth/login" element={<Login/>}></Route>
           <Route path="/auth/register" element={<Register />}></Route>
           <Route path="/user-profile" element={<UserProfile />}></Route>
+          <Route path="/saved" element={<SavedProducts/>}></Route>
         </Routes>
         <Footer />
       </ContextOverAll>

@@ -33,7 +33,7 @@ function AllProducts() {
     <div className="w-full flex justify-center">
       <div className="w-[95%] 2xl:w-[70%]">
         {loaded ? (
-          <HomePageCollection products={products} loaded={loaded} />
+          <HomePageCollection titleBoolean={true} products={products} loaded={loaded} />
         ) : (
           <div className="h-[500px] text-center"><MyLoading></MyLoading></div>
         )}

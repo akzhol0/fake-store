@@ -7,7 +7,21 @@ type HomePageItemProps = {
 }
 
 function HomePageItem({ item }: HomePageItemProps) {
-  const { addCartItem, setModal } = useContext(contextData);
+  const { addCartItem, setModal, addSaveditem, savedProducts, deleteSaveditem } = useContext(contextData);
+  let isSaved;
+
+  function foo() {
+    const savedIds: number[] = [];
+    savedProducts.map((item: any) => savedIds.push(item.id));
+    return savedIds;
+  }
+  const savedItemsIds = foo();
+
+  savedItemsIds.map((itemcb: number) => {
+    if (itemcb === item.id) {
+      isSaved = true;
+    }
+  })
 
   return (
     <div className="w-full h-[600px] md:h-[500px] relative">
@@ -26,8 +40,16 @@ function HomePageItem({ item }: HomePageItemProps) {
         <span className="absolute top-3 left-3 w-[30px] h-[30px] rounded flex justify-center items-center text-white bg-red-500">
           {item.rating.rate}
         </span>
-        <span onClick={() => { addCartItem(item); setModal(true)}} className="w-[40px] h-[40px] p-1 absolute bottom-[153px] right-3 rounded bg-red-500 cursor-pointer">
+        <span onClick={() => { addCartItem(item); setModal(true) }} className="w-[40px] h-[40px] p-1 absolute bottom-[153px] right-3 rounded bg-red-500 cursor-pointer">
           <img src="/img/cart.png" alt="cart picture" />
+        </span>
+        <span onClick={isSaved ? (
+          () => deleteSaveditem(item.id)
+        ) : (
+          () => addSaveditem(item)
+        )}
+          className="w-[40px] h-[40px] p-1 absolute bottom-[153px] right-[55px] rounded bg-white cursor-pointer">
+          <img className="w-full h-full" src={isSaved ? '/img/heart-fll.png' : "/img/heart-emptyw.png"} alt="cart picture" />
         </span>
       </div>
     </div>

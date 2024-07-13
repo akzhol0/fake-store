@@ -41,7 +41,7 @@ function CategoryProd() {
           <MyDefaultButton className="mt-2">{langIsEng ? 'Go Back' : 'Назад'}</MyDefaultButton>
         </span>
         {loaded ? (
-          <HomePageCollection products={products} loaded={loaded} />
+          <HomePageCollection titleBoolean={true} products={products} loaded={loaded} />
         ) : (
           <div className="h-[500px] text-center">
             <MyLoading></MyLoading>

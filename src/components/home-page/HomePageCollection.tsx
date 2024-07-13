@@ -8,9 +8,10 @@ import en from '../../text/en/textEng';
 type HomePageCollectionProps = {
   loaded: boolean;
   products: any;
+  titleBoolean: boolean;
 }
 
-function HomePageCollection({ loaded, products }: HomePageCollectionProps) {
+function HomePageCollection({ loaded, products, titleBoolean }: HomePageCollectionProps) {
   const { searchBar, langIsEng } = useContext(contextData);
 
   function filterProducts() {
@@ -27,10 +28,12 @@ function HomePageCollection({ loaded, products }: HomePageCollectionProps) {
         <>
           {filteredProducts.length ? (
             <>
-              <div className='flex flex-col py-5'>
-                <strong className='text-[40px]'>{langIsEng ? en.main.strong : ru.main.strong}</strong>
-                <small className='text-[15px] text-gray-400'>{langIsEng ? en.main.small : ru.main.small}</small>
-              </div>
+              {titleBoolean && (
+                <div className='flex flex-col py-5'>
+                  <strong className='text-[40px]'>{langIsEng ? en.main.strong : ru.main.strong}</strong>
+                  <small className='text-[15px] text-gray-400'>{langIsEng ? en.main.small : ru.main.small}</small>
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 place-items-center">
                 {products.filter((item: any) => (
                   item.title.toLowerCase().includes(searchBar.toLowerCase()))
@@ -41,7 +44,7 @@ function HomePageCollection({ loaded, products }: HomePageCollectionProps) {
             </>
           ) : (
             <div className="w-full h-[350px] flex justify-center items-center">
-              <p className="text-red-400 font-bold text-[20px]">Empty...</p>
+                <p className="text-red-400 font-bold text-[20px]">{langIsEng ? 'Empty' : 'Пусто'}</p>
             </div>
           )}
         </>

@@ -74,7 +74,7 @@ function Header() {
           </form>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-5 text-[18px]">
             <span className="cursor-pointer flex items-center gap-2"> <img className=" mt-[-2px]" src="/img/user.png" width={24} height={24} /> <Link to={token !== undefined ? '/user-profile' : '/auth/login'}>{langIsEng ? en.header.userOptions[0] : ru.header.userOptions[0]}</Link></span>
-            <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyHeartIcon /></span> {langIsEng ? en.header.userOptions[1] : ru.header.userOptions[1]}</span>
+            <span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyHeartIcon /></span> <Link to='/saved'>{langIsEng ? en.header.userOptions[1] : ru.header.userOptions[1]}</Link></span>
             <Link to='/cart'><span className="cursor-pointer flex items-center gap-2"> <span className="w-[22px] h-[22px] mt-[-1px]"><MyCartIcon /></span> {langIsEng ? en.header.userOptions[2] : ru.header.userOptions[2]}</span></Link>
           </div>
         </div>
@@ -84,12 +84,12 @@ function Header() {
             value={tempSearchBar}
             className="w-full h-[60px] mb-4 ps-4 z-2 border border-gray-400 rounded-md"
             type="text"
-            placeholder={langIsEng ? en.header.input : ru.header.input}/>
+            placeholder={langIsEng ? en.header.input : ru.header.input} />
           <button onClick={() => setSearchBar(tempSearchBar)} className="absolute right-2 bottom-[24px]">
             <Link to='/all-products'>
-                <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">
-                  <img src="/img/s.png" width={25} height={25} />
-                </div>
+              <div className="w-[45px] h-[45px] flex justify-center items-center rounded-md bg-red-500 cursor-pointer">
+                <img src="/img/s.png" width={25} height={25} />
+              </div>
             </Link>
           </button>
         </div>

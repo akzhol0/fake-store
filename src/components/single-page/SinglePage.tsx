@@ -7,11 +7,26 @@ import ru from '../../text/ru/textRus';
 import en from '../../text/en/textEng';
 
 function SinglePage() {
-  const { addCartItem, setModal, langIsEng } = useContext(contextData)
+  const { addCartItem, setModal, langIsEng, deleteSaveditem, addSaveditem, savedProducts } = useContext(contextData)
   const { id } = useParams();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [product, setProduct] = useState<any>([]);
   let navigate = useNavigate();
+
+  let isSaved;
+
+  function foo() {
+    const savedIds: number[] = [];
+    savedProducts.map((item: any) => savedIds.push(item.id));
+    return savedIds;
+  }
+  const savedItemsIds = foo();
+
+  savedItemsIds.map((itemcb: number) => {
+    if (itemcb === product.id) {
+      isSaved = true;
+    }
+  })
 
   const getSingleProd = async () => {
     const url = `https://fakestoreapi.com/products/${id}`
@@ -64,6 +79,15 @@ function SinglePage() {
                 </span>
                 <div onClick={() => { addCartItem(product); setModal(true) }}>
                   <MyDefaultButton className="w-full py-3 mt-2">{langIsEng ? en.singlePage.addToCart : ru.singlePage.addToCart}</MyDefaultButton>
+                </div>
+                <div onClick={isSaved ? (
+                  () => deleteSaveditem(product.id)
+                ) : (
+                    () => addSaveditem(product)
+                )}>
+                  <MyDefaultButton className="w-full bg-white border border-red-400 flex justify-center mt-2 hover:bg-white">
+                    <img width={40} height={40} src={isSaved ? "/img/heart-fll.png" : "/img/heart-emptyw.png"} alt="heart-pic" />
+                  </MyDefaultButton>
                 </div>
               </div>
             </div>

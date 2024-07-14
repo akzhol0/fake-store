@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import Cookies from 'universal-cookie';
 import { collection, doc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
-const cookies = new Cookies();
 
 type ContextProps = {
   cartProducts: any;
@@ -26,6 +25,8 @@ type ContextProps = {
   userInfo: any;
   getAllSavedItems: () => void;
   setSavedProducts: (arg0: any) => void;
+  setUserInfo: (arg0: any) => void;
+  getCartItemLS: () => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -35,6 +36,7 @@ type ContextOverAllProps = {
 };
 
 export function ContextOverAll({ children }: ContextOverAllProps) {
+  const cookies = new Cookies();
   const [check, setCheck] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<any>([]);
   const [modal, setModal] = useState<boolean>(false);
@@ -43,11 +45,28 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [token, setToken] = useState(cookies.get('auth-token'));
   const [savedProducts, setSavedProducts] = useState<any>([]);
   const [userInfo, setUserInfo] = useState<any>([]);
-  const navigate = useNavigate()
+  const [fetched, setFetched] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserInfo();
+    !fetched && getCartItemLS()
   }, [])
+
+  // get all cart items from local storage
+  const getCartItemLS = () => {
+    if (token === undefined) return;
+
+    for (let i = 0; i < 21; i++) {
+      const res = localStorage.getItem(`cartItem${i}`);
+      const cartItem = res ? JSON.parse(res) : null;
+
+      if (cartItem !== null) {
+        setCartProducts((prev: any) => [...prev, cartItem])
+      }
+    }
+    setFetched(true);
+  }
 
   // get all saved items from firestore
   const getAllSavedItems = async () => {
@@ -111,6 +130,15 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       return;
     };
 
+    const res = localStorage.getItem(`cartItem${item.id}`)
+    const cartParsedItem = res ? JSON.parse(res) : null;
+    if (cartParsedItem === null) {
+      localStorage.setItem(`cartItem${item.id}`, JSON.stringify({ ...item, quantity: 1 }))
+    } else {
+      cartParsedItem.quantity += 1;
+      localStorage.setItem(`cartItem${item.id}`, JSON.stringify(cartParsedItem))
+    }
+
     setModal(true)
     const addIds: number[] = [];
     cartProducts.map((item: any) => addIds.push(item.id))
@@ -128,6 +156,16 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
 
   // delete cart item
   function deleteItemCart(itemId: number) {
+    const res = localStorage.getItem(`cartItem${itemId}`)
+    const cartParsedItem = res ? JSON.parse(res) : null;
+
+    if (cartParsedItem.quantity === 1) {
+      localStorage.removeItem(`cartItem${itemId}`)
+    } else {
+      cartParsedItem.quantity -= 1;
+      localStorage.setItem(`cartItem${itemId}`, JSON.stringify(cartParsedItem))
+    }
+
     cartProducts.map((item: any) => {
       if (item.id === itemId) {
         if (item.quantity > 1) {
@@ -172,6 +210,8 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       userInfo,
       getAllSavedItems,
       setSavedProducts,
+      setUserInfo,
+      getCartItemLS,
     }}>
       {children}
     </contextData.Provider>

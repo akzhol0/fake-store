@@ -1,7 +1,7 @@
 import HomePageItem from "./HomePageItem";
 import MyLoading from "../UI/myLoadingPerfs/MyLoading";
 import { useContext } from "react";
-import { contextData } from '../../context/logic';
+import { contextData } from "../../context/logic";
 import ru from '../../text/ru/textRus';
 import en from '../../text/en/textEng';
 

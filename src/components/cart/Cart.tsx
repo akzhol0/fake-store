@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import CartItem from "./CartItem";
-import { contextData } from '../../context/logic';
+import { contextData } from "../../context/logic";
 import ru from '../../text/ru/textRus';
 import en from '../../text/en/textEng';
 

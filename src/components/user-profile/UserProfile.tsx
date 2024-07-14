@@ -1,29 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { contextData } from "../../context/logic";
 import { useNavigate } from "react-router";
 import MyDefaultButton from "../UI/my-buttons/MyDefaultButton";
 import Cookies from "universal-cookie";
 
 function UserProfile() {
-  const { token, setToken } = useContext(contextData);
-  const [userInfo, setUserInfo] = useState<any>([]);
+  const { setToken, userInfo, setSavedProducts } = useContext(contextData);
   const navigate = useNavigate();
   const cookies = new Cookies()
-
-  const getUserInfo = () => {
-    if (token === undefined) {
-      navigate('/')
-      return;
-    }
-
-    const res = localStorage.getItem('user');
-    const user = res ? JSON.parse(res) : null;
-    setUserInfo(user);
-  }
-
-  useEffect(() => {
-    getUserInfo();
-  }, [])
 
   return (
     <div className="w-full flex justify-center">
@@ -37,7 +21,8 @@ function UserProfile() {
           localStorage.removeItem('user');
           cookies.remove('auth-token');
           navigate('/');
-          setToken(undefined)
+          setToken(undefined);
+          setSavedProducts([])
         }}>
           <MyDefaultButton className="w-[350px] mt-4">Exit</MyDefaultButton>
         </span>

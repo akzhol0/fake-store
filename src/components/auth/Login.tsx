@@ -24,8 +24,12 @@ function Login() {
       .then((userCredential) => {
         localStorage.setItem('user', JSON.stringify(userCredential.user));
         cookies.set('auth-token', userCredential.user.uid);
-        setToken(userCredential.user.uid)
-        navigate("/");
+        setToken(userCredential.user.uid);
+        setErr(langIsEng ? 'Succesfully signed in' : 'Успешно вошли')
+
+        setTimeout(() => {
+          navigate("/");
+        }, 100)
       })
       .catch((err) => {
         if (err.code === "auth/invalid-email") {

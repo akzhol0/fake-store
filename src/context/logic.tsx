@@ -1,6 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import Cookies from 'universal-cookie';
-
+import { collection, doc, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
 const cookies = new Cookies();
 
 type ContextProps = {
@@ -21,6 +23,9 @@ type ContextProps = {
   savedProducts: any;
   addSaveditem: (arg0: any) => void;
   deleteSaveditem: (arg0: number) => void;
+  userInfo: any;
+  getAllSavedItems: () => void;
+  setSavedProducts: (arg0: any) => void;
 };
 
 export const contextData = createContext({} as ContextProps);
@@ -37,9 +42,42 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   const [langIsEng, setLangIsEng] = useState<boolean>(true);
   const [token, setToken] = useState(cookies.get('auth-token'));
   const [savedProducts, setSavedProducts] = useState<any>([]);
+  const [userInfo, setUserInfo] = useState<any>([]);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    getUserInfo();
+  }, [])
+
+  // get all saved items from firestore
+  const getAllSavedItems = async () => {
+    setSavedProducts([]);
+    const querySnapshot = await getDocs(collection(db, `${userInfo.email}`));
+    querySnapshot.forEach((doc) => {
+      setSavedProducts((prev: any) => [...prev, doc.data()])
+    });
+  }
+
+  // get user info from ls
+  const getUserInfo = () => {
+    if (token === undefined) {
+      navigate('/')
+      return;
+    }
+
+    const res = localStorage.getItem('user');
+    const user = res ? JSON.parse(res) : null;
+    setUserInfo(user)
+  }
 
   // add to saved
   const addSaveditem = (item: any) => {
+    if (token === undefined) {
+      navigate('/auth/login');
+      return;
+    };
+
+    addSavedItemFirestore(item)
     const addIds: number[] = [];
     savedProducts.map((item: any) => addIds.push(item.id))
 
@@ -49,12 +87,31 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
   }
 
   // delete  saved
-  const deleteSaveditem = (id: number) => {
+  const deleteSaveditem = async (id: number) => {
     setSavedProducts(savedProducts.filter((item: any) => item.id !== id));
+    await deleteDoc(doc(db, `${userInfo.email}`, `savedItem${id}`));
+  }
+
+  // add saved item to firestore
+  const addSavedItemFirestore = async (item: any) => {
+    await setDoc(
+      doc(
+        db,
+        `${userInfo.email}`,
+        `savedItem${item.id}`,
+      ), {
+      ...item
+    })
   }
 
   // add cart item
   const addCartItem = (item: any) => {
+    if (token === undefined) {
+      navigate('/auth/login')
+      return;
+    };
+
+    setModal(true)
     const addIds: number[] = [];
     cartProducts.map((item: any) => addIds.push(item.id))
 
@@ -67,7 +124,7 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
     } else {
       setCartProducts((prev: any) => [...prev, { ...item, quantity: 1 }]);
     }
-  }
+  };
 
   // delete cart item
   function deleteItemCart(itemId: number) {
@@ -112,6 +169,9 @@ export function ContextOverAll({ children }: ContextOverAllProps) {
       savedProducts,
       addSaveditem,
       deleteSaveditem,
+      userInfo,
+      getAllSavedItems,
+      setSavedProducts,
     }}>
       {children}
     </contextData.Provider>

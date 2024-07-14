@@ -7,7 +7,7 @@ type HomePageItemProps = {
 }
 
 function HomePageItem({ item }: HomePageItemProps) {
-  const { addCartItem, setModal, addSaveditem, savedProducts, deleteSaveditem } = useContext(contextData);
+  const { addCartItem, addSaveditem, savedProducts, deleteSaveditem } = useContext(contextData);
   let isSaved;
 
   function foo() {

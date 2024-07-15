@@ -13,7 +13,7 @@ function SavedProducts() {
           {token !== undefined && (
             <span onClick={() => getAllSavedItems()}>
               <MyDefaultButton className="text-[20px]">
-                Load Saved Items
+                {langIsEng ? 'Load saved items' : 'Загрузить'}
               </MyDefaultButton>
             </span>
           )}

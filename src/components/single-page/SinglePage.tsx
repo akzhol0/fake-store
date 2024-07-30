@@ -7,7 +7,7 @@ import ru from '../../text/ru/textRus';
 import en from '../../text/en/textEng';
 
 function SinglePage() {
-  const { addCartItem, setModal, langIsEng, deleteSaveditem, addSaveditem, savedProducts } =
+  const { addCartItem, langIsEng, deleteSaveditem, addSaveditem, savedProducts } =
     useContext(contextData);
   const { id } = useParams();
   const [loaded, setLoaded] = useState<boolean>(false);
